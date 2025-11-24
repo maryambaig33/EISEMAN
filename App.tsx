@@ -44,22 +44,20 @@ const App: React.FC = () => {
     <div className="min-h-screen flex flex-col font-sans text-luxury-text bg-white">
       <Header />
       
-      {/* Breadcrumbs & Title */}
-      <div className="container mx-auto px-4 md:px-12 pt-12 pb-8">
-        <nav className="text-[10px] uppercase tracking-widest text-gray-400 mb-6 font-bold">
-            <a href="#" className="hover:text-gold-600">Home</a>
-            <span className="mx-2">/</span>
-            <span className="text-luxury-black">Jewelry</span>
-        </nav>
-        <h1 className="text-3xl md:text-5xl font-serif text-luxury-black mb-4 text-center">Jewelry & Timepieces</h1>
-        <div className="w-16 h-0.5 bg-gold-500 mx-auto mb-6"></div>
-        <p className="text-gray-500 text-sm max-w-2xl mx-auto text-center font-serif italic">
-          Explore our exclusive collection of unparalleled craftsmanship and design.
-        </p>
+      {/* Page Title Section */}
+      <div className="bg-luxury-light py-10 mb-8 border-b border-gray-100">
+          <div className="container mx-auto px-4 md:px-8 text-center">
+             <h1 className="text-3xl md:text-4xl font-serif text-luxury-black mb-3">Jewelry & Timepieces</h1>
+             <div className="flex justify-center items-center text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold space-x-2">
+                <a href="#" className="hover:text-gold-600">Home</a>
+                <span>/</span>
+                <span className="text-luxury-black">Collection</span>
+            </div>
+          </div>
       </div>
 
-      <main className="container mx-auto px-4 md:px-12 flex-1 pb-20">
-        <div className="flex flex-col md:flex-row gap-12">
+      <main className="container mx-auto px-4 md:px-8 flex-1 pb-20">
+        <div className="flex flex-col md:flex-row gap-8">
           
           {/* Sidebar */}
           <FilterSidebar filters={filters} setFilters={setFilters} />
@@ -68,15 +66,15 @@ const App: React.FC = () => {
           <div className="flex-1">
             
             {/* Toolbar */}
-            <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
-              <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">{filteredProducts.length} Items</span>
+            <div className="flex justify-between items-center mb-6 pb-2">
+              <span className="text-xs font-bold tracking-widest text-gray-500 uppercase">{filteredProducts.length} Results</span>
               
               <div className="flex items-center space-x-6">
-                <div className="relative group">
+                <div className="relative group cursor-pointer">
                     <button className="flex items-center space-x-2 text-xs font-bold tracking-widest uppercase text-gray-800 hover:text-gold-600">
-                        <span>Sort By</span>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                        <span>Sort By: Featured</span>
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
                 </div>
@@ -84,7 +82,7 @@ const App: React.FC = () => {
             </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
               {filteredProducts.map(product => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -92,28 +90,29 @@ const App: React.FC = () => {
 
             {/* Empty State */}
             {filteredProducts.length === 0 && (
-              <div className="py-20 text-center">
-                <p className="text-xl font-serif text-gray-400 italic">No items match your selection.</p>
+              <div className="py-24 text-center">
+                <p className="text-xl font-serif text-gray-400 italic mb-4">No items match your specific criteria.</p>
                 <button 
                   onClick={() => setFilters({ category: [], brand: [], priceRange: [0, 50000]})}
-                  className="mt-6 px-6 py-2 border border-luxury-black text-xs font-bold uppercase tracking-widest hover:bg-luxury-black hover:text-white transition-colors"
+                  className="px-8 py-3 bg-luxury-black text-white text-xs font-bold uppercase tracking-widest hover:bg-gold-600 transition-colors"
                 >
-                  Clear All Filters
+                  View All Products
                 </button>
               </div>
             )}
 
-            {/* Pagination */}
+            {/* Pagination Simulation */}
             {filteredProducts.length > 0 && (
-              <div className="mt-20 border-t border-gray-100 pt-8 flex justify-center items-center space-x-2">
-                 <button className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gold-600 transition-colors">
+              <div className="mt-16 flex justify-center items-center space-x-1">
+                 <button className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-luxury-black transition-colors">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" /></svg>
                  </button>
-                <button className="w-8 h-8 flex items-center justify-center text-xs font-bold text-gray-500 hover:text-luxury-black">1</button>
-                <button className="w-8 h-8 flex items-center justify-center text-xs font-bold bg-luxury-black text-white">2</button>
-                <button className="w-8 h-8 flex items-center justify-center text-xs font-bold text-gray-500 hover:text-luxury-black">3</button>
-                <button className="w-8 h-8 flex items-center justify-center text-xs font-bold text-gray-500 hover:text-luxury-black">4</button>
-                <button className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gold-600 transition-colors">
+                <button className="w-10 h-10 flex items-center justify-center text-xs font-bold bg-gray-100 text-luxury-black border border-gray-200">1</button>
+                <button className="w-10 h-10 flex items-center justify-center text-xs font-bold text-gray-500 hover:text-luxury-black hover:bg-gray-50">2</button>
+                <button className="w-10 h-10 flex items-center justify-center text-xs font-bold text-gray-500 hover:text-luxury-black hover:bg-gray-50">3</button>
+                <span className="w-10 h-10 flex items-center justify-center text-xs text-gray-400">...</span>
+                <button className="w-10 h-10 flex items-center justify-center text-xs font-bold text-gray-500 hover:text-luxury-black hover:bg-gray-50">8</button>
+                <button className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-luxury-black transition-colors">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
                  </button>
               </div>

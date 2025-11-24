@@ -1,8 +1,19 @@
 import { GoogleGenAI } from "@google/genai";
 import { Product } from "../types";
 
-// Initialize the Gemini API client
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Safely access the API key to prevent runtime crashes in browser environments
+// if process is undefined.
+const getApiKey = () => {
+  try {
+    return process.env.API_KEY;
+  } catch (e) {
+    console.warn("process.env is not accessible. Ensure API_KEY is configured in your environment.");
+    return "";
+  }
+};
+
+const apiKey = getApiKey();
+const ai = new GoogleGenAI({ apiKey: apiKey });
 
 export const getStylistAdvice = async (
   userQuery: string,
