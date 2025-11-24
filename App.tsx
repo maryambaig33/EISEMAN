@@ -6,7 +6,7 @@ import { ProductCard } from './components/ProductCard';
 import { AIStylist } from './components/AIStylist';
 import { Product, FilterState } from './types';
 
-// Enhanced Mock Data
+// Enhanced Mock Data with more lifestyle-oriented images for the "vibe"
 const MOCK_PRODUCTS: Product[] = [
   { id: 1, name: "Oyster Perpetual Datejust 36", brand: "Rolex", price: 8950, category: "Watches", image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&q=80&w=800", isNew: true },
   { id: 2, name: "Panthère de Cartier Watch", brand: "Cartier", price: 4150, category: "Watches", image: "https://images.unsplash.com/photo-1619134778706-7015533a6150?auto=format&fit=crop&q=80&w=800" },
@@ -45,19 +45,19 @@ const App: React.FC = () => {
       <Header />
       
       {/* Page Title Section */}
-      <div className="bg-luxury-light py-10 mb-8 border-b border-gray-100">
-          <div className="container mx-auto px-4 md:px-8 text-center">
-             <h1 className="text-3xl md:text-4xl font-serif text-luxury-black mb-3">Jewelry & Timepieces</h1>
-             <div className="flex justify-center items-center text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold space-x-2">
-                <a href="#" className="hover:text-gold-600">Home</a>
-                <span>/</span>
+      <div className="bg-luxury-light pt-16 pb-12 mb-12 border-b border-gray-100">
+          <div className="container mx-auto px-6 md:px-12 text-center animate-fade-in-up">
+             <h1 className="text-4xl md:text-5xl font-serif text-luxury-black mb-4 tracking-tight">Jewelry & Timepieces</h1>
+             <div className="flex justify-center items-center text-[10px] uppercase tracking-[0.25em] text-gray-400 font-bold space-x-3">
+                <a href="#" className="hover:text-gold-600 transition-colors">Home</a>
+                <span className="text-gold-400">/</span>
                 <span className="text-luxury-black">Collection</span>
             </div>
           </div>
       </div>
 
-      <main className="container mx-auto px-4 md:px-8 flex-1 pb-20">
-        <div className="flex flex-col md:flex-row gap-8">
+      <main className="container mx-auto px-6 md:px-12 flex-1 pb-32">
+        <div className="flex flex-col md:flex-row gap-12">
           
           {/* Sidebar */}
           <FilterSidebar filters={filters} setFilters={setFilters} />
@@ -66,15 +66,15 @@ const App: React.FC = () => {
           <div className="flex-1">
             
             {/* Toolbar */}
-            <div className="flex justify-between items-center mb-6 pb-2">
-              <span className="text-xs font-bold tracking-widest text-gray-500 uppercase">{filteredProducts.length} Results</span>
+            <div className="flex justify-between items-end mb-8 pb-4 border-b border-gray-100">
+              <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase">{filteredProducts.length} Results</span>
               
               <div className="flex items-center space-x-6">
                 <div className="relative group cursor-pointer">
-                    <button className="flex items-center space-x-2 text-xs font-bold tracking-widest uppercase text-gray-800 hover:text-gold-600">
+                    <button className="flex items-center space-x-2 text-[10px] font-bold tracking-[0.2em] uppercase text-luxury-black hover:text-gold-600 transition-colors">
                         <span>Sort By: Featured</span>
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
                 </div>
@@ -82,7 +82,7 @@ const App: React.FC = () => {
             </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
               {filteredProducts.map(product => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -90,30 +90,29 @@ const App: React.FC = () => {
 
             {/* Empty State */}
             {filteredProducts.length === 0 && (
-              <div className="py-24 text-center">
-                <p className="text-xl font-serif text-gray-400 italic mb-4">No items match your specific criteria.</p>
+              <div className="py-32 text-center bg-gray-50 rounded-lg">
+                <p className="text-2xl font-serif text-gray-400 italic mb-6">No items match your specific criteria.</p>
                 <button 
                   onClick={() => setFilters({ category: [], brand: [], priceRange: [0, 50000]})}
-                  className="px-8 py-3 bg-luxury-black text-white text-xs font-bold uppercase tracking-widest hover:bg-gold-600 transition-colors"
+                  className="px-10 py-4 bg-luxury-black text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-gold-600 transition-colors shadow-lg"
                 >
-                  View All Products
+                  Clear Filters
                 </button>
               </div>
             )}
 
             {/* Pagination Simulation */}
             {filteredProducts.length > 0 && (
-              <div className="mt-16 flex justify-center items-center space-x-1">
-                 <button className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-luxury-black transition-colors">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" /></svg>
+              <div className="mt-24 flex justify-center items-center space-x-2">
+                 <button className="w-12 h-12 flex items-center justify-center text-gray-300 hover:text-luxury-black transition-colors">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 19l-7-7 7-7" /></svg>
                  </button>
-                <button className="w-10 h-10 flex items-center justify-center text-xs font-bold bg-gray-100 text-luxury-black border border-gray-200">1</button>
-                <button className="w-10 h-10 flex items-center justify-center text-xs font-bold text-gray-500 hover:text-luxury-black hover:bg-gray-50">2</button>
-                <button className="w-10 h-10 flex items-center justify-center text-xs font-bold text-gray-500 hover:text-luxury-black hover:bg-gray-50">3</button>
-                <span className="w-10 h-10 flex items-center justify-center text-xs text-gray-400">...</span>
-                <button className="w-10 h-10 flex items-center justify-center text-xs font-bold text-gray-500 hover:text-luxury-black hover:bg-gray-50">8</button>
-                <button className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-luxury-black transition-colors">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
+                <button className="w-12 h-12 flex items-center justify-center text-sm font-serif font-bold bg-luxury-black text-white">1</button>
+                <button className="w-12 h-12 flex items-center justify-center text-sm font-serif font-bold text-gray-500 hover:text-luxury-black hover:bg-gray-50 transition-colors">2</button>
+                <button className="w-12 h-12 flex items-center justify-center text-sm font-serif font-bold text-gray-500 hover:text-luxury-black hover:bg-gray-50 transition-colors">3</button>
+                <span className="w-12 h-12 flex items-center justify-center text-sm text-gray-400 font-serif">...</span>
+                <button className="w-12 h-12 flex items-center justify-center text-gray-300 hover:text-luxury-black transition-colors">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 5l7 7-7 7" /></svg>
                  </button>
               </div>
             )}

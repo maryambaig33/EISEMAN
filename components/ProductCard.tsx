@@ -8,32 +8,32 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="group cursor-pointer flex flex-col h-full bg-white">
-      <div className="relative aspect-square overflow-hidden bg-[#fafafa] mb-4">
+      <div className="relative aspect-square overflow-hidden bg-gray-50 mb-5">
         <img 
           src={product.image} 
           alt={product.name}
-          className="w-full h-full object-contain p-8 transform transition-transform duration-1000 ease-out group-hover:scale-105"
+          className="w-full h-full object-cover transform transition-transform duration-1000 ease-out group-hover:scale-110"
         />
         {product.isNew && (
-          <span className="absolute top-0 left-0 bg-white text-[9px] font-bold tracking-[0.2em] uppercase px-3 py-2 border-r border-b border-gray-100 text-luxury-black">
+          <span className="absolute top-0 left-0 bg-white/90 backdrop-blur-sm text-[9px] font-bold tracking-[0.2em] uppercase px-4 py-2 text-luxury-black shadow-sm">
             New Arrival
           </span>
         )}
         
         {/* Quick View Overlay */}
-        <div className="absolute inset-x-0 bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-             <button className="w-full bg-white/95 backdrop-blur-sm text-luxury-black py-3 text-[10px] font-bold uppercase tracking-[0.2em] border-t border-gray-100 hover:bg-luxury-black hover:text-white transition-colors">
+        <div className="absolute inset-x-0 bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-full group-hover:translate-y-0">
+             <button className="w-full bg-white/95 backdrop-blur-md text-luxury-black py-4 text-[10px] font-bold uppercase tracking-[0.25em] hover:bg-luxury-black hover:text-white transition-colors border-t border-gray-100">
                 Quick View
             </button>
         </div>
       </div>
       
-      <div className="text-center space-y-1.5 flex-grow flex flex-col items-center">
+      <div className="text-center space-y-2 flex-grow flex flex-col items-center px-2">
         <h3 className="text-[10px] font-bold tracking-[0.2em] text-gray-400 uppercase">{product.brand}</h3>
-        <h2 className="text-sm font-medium text-luxury-black font-serif leading-relaxed group-hover:text-gold-600 transition-colors px-2">
+        <h2 className="text-base font-serif text-luxury-black leading-snug group-hover:text-gold-600 transition-colors">
            {product.name}
         </h2>
-        <p className="text-sm text-gray-900 font-sans tracking-wider mt-1">
+        <p className="text-xs font-bold text-luxury-black tracking-widest mt-1">
           ${product.price.toLocaleString()}
         </p>
       </div>

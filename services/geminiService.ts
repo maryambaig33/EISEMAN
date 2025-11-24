@@ -1,19 +1,20 @@
 import { GoogleGenAI } from "@google/genai";
 import { Product } from "../types";
 
-// Safely access the API key to prevent runtime crashes in browser environments
-// if process is undefined.
-const getApiKey = () => {
+// Helper to safely access process.env.API_KEY without crashing in environments where process is undefined.
+const getApiKey = (): string => {
   try {
-    return process.env.API_KEY;
+    // Check if process exists before accessing it to avoid ReferenceError
+    if (typeof process !== 'undefined' && process.env) {
+      return process.env.API_KEY || '';
+    }
+    return '';
   } catch (e) {
-    console.warn("process.env is not accessible. Ensure API_KEY is configured in your environment.");
-    return "";
+    return '';
   }
 };
 
-const apiKey = getApiKey();
-const ai = new GoogleGenAI({ apiKey: apiKey });
+const ai = new GoogleGenAI({ apiKey: getApiKey() });
 
 export const getStylistAdvice = async (
   userQuery: string,
